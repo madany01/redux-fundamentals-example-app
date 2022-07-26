@@ -1,5 +1,20 @@
 function App() {
-  return <h1>it works</h1>
+  return (
+    <div className='App'>
+      <nav>
+        <section>
+          <h1>Redux Fundamentals Example</h1>
+
+          <div className='navContent'>
+            <div className='navLinks' />
+          </div>
+        </section>
+      </nav>
+      <section>
+        <h2>Welcome to the Redux Fundamentals example app!</h2>
+      </section>
+    </div>
+  )
 }
 
 export default App
