@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { TodosActions } from '../features/todos'
+import { postTodo } from '../features/todos'
 
 function Header() {
   const [text, setText] = useState('')
@@ -10,7 +10,8 @@ function Header() {
     const todoText = e.target.value.trim()
 
     if (!(e.key === 'Enter' && todoText)) return
-    dispatch({ type: TodosActions.todoAdded, payload: todoText })
+
+    dispatch(postTodo(todoText))
 
     setText('')
   }

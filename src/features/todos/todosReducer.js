@@ -9,15 +9,11 @@ function nextTodoId(todos) {
 // eslint-disable-next-line default-param-last
 function todosReducer(state = initialState, action) {
   switch (action.type) {
+    case TodosActions.todosLoaded:
+      return action.payload
+
     case TodosActions.todoAdded:
-      return [
-        ...state,
-        {
-          id: nextTodoId(state),
-          text: action.payload,
-          completed: false,
-        },
-      ]
+      return [...state, action.payload]
 
     case TodosActions.todoToggled:
       return state.map(todo => {

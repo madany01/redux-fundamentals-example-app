@@ -7,6 +7,8 @@ import './style/index.css'
 import App from './components/App'
 import store from './store'
 
+import './api/server'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(

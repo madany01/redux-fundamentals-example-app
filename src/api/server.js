@@ -67,7 +67,7 @@ new Server({
     const server = this
 
     this.post('/todos', (schema, req) => {
-      const data = this.normalizedRequestAttrs()
+      const data = JSON.parse(req.requestBody)
 
       if (data.text === 'error') {
         throw new Error('Could not save the todo!')
@@ -86,7 +86,7 @@ new Server({
   factories: {
     todo: Factory.extend({
       id(i) {
-        return Number(i)
+        return Number(i) + 1
       },
       text() {
         return generateTodoText()
