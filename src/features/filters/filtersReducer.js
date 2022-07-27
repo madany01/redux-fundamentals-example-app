@@ -1,16 +1,8 @@
-const FiltersStatus = {
-  ALL: 'All',
-  COMPLETED: 'Completed',
-  ACTIVE: 'Active',
-}
-
-const FiltersActions = {
-  statusChanged: 'filters/statusChanged',
-  colorToggled: 'filters/colorToggled',
-}
+import FiltersActions from './FiltersActions'
+import FiltersStatus from './FiltersStatus'
 
 const initialState = {
-  status: FiltersStatus.ALL,
+  status: FiltersStatus.All,
   colors: [],
 }
 
@@ -41,4 +33,3 @@ function filtersReducer(state = initialState, action) {
 }
 
 export default filtersReducer
-export { FiltersStatus, FiltersActions }

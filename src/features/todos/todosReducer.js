@@ -1,13 +1,6 @@
-const initialState = []
+import TodosActions from './TodosActions'
 
-const TodosActions = {
-  todoAdded: 'todos/todoAdded',
-  todoDeleted: 'todos/todoDeleted',
-  todoToggled: 'todos/todoToggled',
-  colorChanged: 'todos/colorChanged',
-  allCompleted: 'todos/allCompleted',
-  completedCleared: 'todos/completedCleared',
-}
+const initialState = []
 
 function nextTodoId(todos) {
   return 1 + todos.reduce((maxId, { id }) => Math.max(maxId, id), -1)
@@ -39,10 +32,10 @@ function todosReducer(state = initialState, action) {
       })
 
     case TodosActions.colorChanged: {
-      const { color, todoId } = action.payload
+      const { color, id } = action.payload
 
       return state.map(todo => {
-        if (todo.id !== todoId) {
+        if (todo.id !== id) {
           return todo
         }
 
@@ -70,4 +63,3 @@ function todosReducer(state = initialState, action) {
 }
 
 export default todosReducer
-export { TodosActions }

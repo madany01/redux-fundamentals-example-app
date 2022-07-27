@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import todosReducer from './features/todos/todosReducer'
-import filtersReducer from './features/filters/filtersReducer'
+import { todosReducer } from './features/todos'
+import { filtersReducer } from './features/filters'
 
 const rootReducer = combineReducers({
   todos: todosReducer,
