@@ -1,15 +1,17 @@
 import { client } from '../../api/client'
-import TodosActions from './TodosActions'
+import { todoAdded, todosLoaded, todosLoading } from './action-creators'
 
-async function fetchTodos(dispatch) {
+const fetchTodos = () => async dispatch => {
+  dispatch(todosLoading())
+
   const { todos } = await client.get('/fakeApi/todos')
 
-  dispatch({ type: TodosActions.todosLoaded, payload: todos })
+  return dispatch(todosLoaded(todos))
 }
 
 const postTodo = todoText => async dispatch => {
   const { todo } = await client.post('/fakeApi/todos', { text: todoText })
-  dispatch({ type: TodosActions.todoAdded, payload: todo })
+  return dispatch(todoAdded(todo))
 }
 
 export { fetchTodos, postTodo }

@@ -1,7 +1,9 @@
-export { default as todosReducer } from './todosReducer'
+export { default as todosReducer } from './reducer'
 
-export { default as TodosActions } from './TodosActions'
+export * from './action-creators'
 
 export * from './selectors'
 
 export * from './thunks'
+
+export { default as TodosLoadingStatus } from './LoadingStatus'

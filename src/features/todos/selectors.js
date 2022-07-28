@@ -1,10 +1,41 @@
-const selectTodos = state => state.todos
+import { createSelector } from 'reselect'
+import { FiltersStatus, selectFilters } from '../filters'
 
-const selectRemainingTodos = state =>
-  selectTodos(state).filter(({ completed }) => !completed)
+const selectTodos = createSelector(
+  state => state.todos.entities,
+  todosObj => Object.values(todosObj)
+)
+const selectTodosLoadingStatus = state => state.todos.status
 
-const selectTodosIds = state => selectTodos(state).map(({ id }) => id)
+const selectRemainingTodosCount = state =>
+  selectTodos(state).filter(({ completed }) => !completed).length
 
-const selectTodoById = (state, id) => selectTodos(state).find(todo => todo.id === id)
+const selectTodosIds = createSelector(selectTodos, todos => todos.map(todo => todo.id))
 
-export { selectTodos, selectRemainingTodos, selectTodosIds, selectTodoById }
+const selectTodoById = id => state => state.todos.entities[id]
+
+const selectFilteredTodos = createSelector(
+  selectTodos,
+  selectFilters,
+  (todos, { status, colors }) =>
+    todos.filter(
+      todo =>
+        (status === FiltersStatus.All ||
+          (status === FiltersStatus.Completed && todo.completed) ||
+          (status === FiltersStatus.Remaining && !todo.completed)) &&
+        (colors.length === 0 || colors.includes(todo.color))
+    )
+)
+
+const selectFilteredTodosIds = createSelector(selectFilteredTodos, todos =>
+  todos.map(todo => todo.id)
+)
+
+export {
+  selectTodos,
+  selectTodosLoadingStatus,
+  selectRemainingTodosCount,
+  selectTodosIds,
+  selectTodoById,
+  selectFilteredTodosIds,
+}

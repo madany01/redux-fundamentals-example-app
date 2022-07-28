@@ -1,4 +1,5 @@
 const TodosActions = {
+  todosLoading: 'todos/todosLoading',
   todosLoaded: 'todos/todosLoaded',
   todoAdded: 'todos/todoAdded',
   todoDeleted: 'todos/todoDeleted',

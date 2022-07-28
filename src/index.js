@@ -10,11 +10,11 @@ import store from './store'
 import './api/server'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+const strict = true
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+const components = (
+  <Provider store={store}>
+    <App />
+  </Provider>
 )
+root.render(strict ? <React.StrictMode>{components}</React.StrictMode> : components)
