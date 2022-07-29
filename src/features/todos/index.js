@@ -1,6 +1,4 @@
-export { default as todosReducer } from './reducer'
-
-export * from './action-creators'
+export * from './slicer'
 
 export * from './selectors'
 

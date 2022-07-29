@@ -1,11 +1,13 @@
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from '@redux-devtools/extension'
-import thunkMiddleware from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
 
-import reducer from './reducer'
+import { todosReducer } from './features/todos'
+import { filtersReducer } from './features/filters'
 
-const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
-
-const store = createStore(reducer, composedEnhancer)
+const store = configureStore({
+  reducer: {
+    todos: todosReducer,
+    filters: filtersReducer,
+  },
+})
 
 export default store

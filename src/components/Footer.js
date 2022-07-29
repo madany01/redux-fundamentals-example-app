@@ -7,11 +7,7 @@ import {
   filterColorToggled,
   filterStatusChanged,
 } from '../features/filters'
-import {
-  selectRemainingTodosCount,
-  todosAllCompleted,
-  todosCompletedCleared,
-} from '../features/todos'
+import { selectRemainingTodosCount, todosActions } from '../features/todos'
 
 function RemainingTodos({ count }) {
   const suffix = count === 1 ? '' : 's'
@@ -87,9 +83,8 @@ function Footer() {
 
   const onStatusChange = newStatus => dispatch(filterStatusChanged(newStatus))
 
-  const onMarkCompletedClicked = () => dispatch(todosAllCompleted())
-
-  const onClearCompletedClicked = () => dispatch(todosCompletedCleared())
+  const onMarkCompletedClicked = () => dispatch(todosActions.allTodosCompleted())
+  const onClearCompletedClicked = () => dispatch(todosActions.completedTodosCleared())
 
   return (
     <footer className='footer'>

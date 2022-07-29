@@ -1,17 +1,14 @@
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import { client } from '../../api/client'
-import { todoAdded, todosLoaded, todosLoading } from './action-creators'
 
-const fetchTodos = () => async dispatch => {
-  dispatch(todosLoading())
-
+const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   const { todos } = await client.get('/fakeApi/todos')
+  return todos
+})
 
-  return dispatch(todosLoaded(todos))
-}
-
-const postTodo = todoText => async dispatch => {
+const postTodo = createAsyncThunk('todos/postTodo', async todoText => {
   const { todo } = await client.post('/fakeApi/todos', { text: todoText })
-  return dispatch(todoAdded(todo))
-}
+  return todo
+})
 
 export { fetchTodos, postTodo }

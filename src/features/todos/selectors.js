@@ -1,18 +1,18 @@
-import { createSelector } from 'reselect'
-import { FiltersStatus, selectFilters } from '../filters'
+import { createSelector } from '@reduxjs/toolkit'
 
-const selectTodos = createSelector(
-  state => state.todos.entities,
-  todosObj => Object.values(todosObj)
-)
-const selectTodosLoadingStatus = state => state.todos.status
+import { FiltersStatus, selectFilters } from '../filters'
+import todoAdapter from './adapter'
+
+const selectTodosSlice = state => state.todos
+
+const { selectAll: selectTodos, selectById: selectTodoById } =
+  todoAdapter.getSelectors(selectTodosSlice)
+const selectTodosLoadingStatus = state => selectTodosSlice(state).status
 
 const selectRemainingTodosCount = state =>
   selectTodos(state).filter(({ completed }) => !completed).length
 
 const selectTodosIds = createSelector(selectTodos, todos => todos.map(todo => todo.id))
-
-const selectTodoById = id => state => state.todos.entities[id]
 
 const selectFilteredTodos = createSelector(
   selectTodos,
